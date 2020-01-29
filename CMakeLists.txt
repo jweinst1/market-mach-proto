@@ -21,7 +21,12 @@ endif(MSVC)
 
 # Options
 option(WITH_testing "Allows tests to be run" ON)
+option(WITH_debug "Turns on debug related messages" OFF)
 
 if(WITH_testing MATCHES ON)
    enable_testing()
 endif(WITH_testing MATCHES ON)
+
+if(WITH_debug MATCHES ON)
+   add_definitions(-DWITH_DEBUG_F)
+endif(WITH_debug MATCHES ON)
