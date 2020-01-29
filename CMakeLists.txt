@@ -30,3 +30,5 @@ endif(WITH_testing MATCHES ON)
 if(WITH_debug MATCHES ON)
    add_definitions(-DWITH_DEBUG_F)
 endif(WITH_debug MATCHES ON)
+
+include_directories($(PROJECT_SOURCE_DIR)/include)
