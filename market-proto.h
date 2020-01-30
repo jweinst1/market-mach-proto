@@ -1,9 +1,14 @@
-#ifndef MARKET_TYPES_H
-#define MARKET_TYPES_H
+#ifndef MARKET_PROTO_H
+#define MARKET_PROTO_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
+
+/**
+ * Single header imp for market prototype.
+ */
 
 /**
  * A unique ID for every type of member in a market.
@@ -68,9 +73,20 @@ typedef struct {
 	size_t customers_size;
 	MarketItem* items;
 	size_t items_size;
+	MarketStrategy* strategies;
+	size_t strategy_size;
 	unsigned votality;
 	size_t turns;
-} MarketCenter;
+} Market;
 
 
-#endif // MARKET_TYPES_H
+void Market_init_new(Market* m, size_t items, size_t customers, size_t strategies, size_t orders, unsigned vol)
+{
+	m->votality = vol;
+	m->turns = 0;
+	m->customers_size = customers;
+	m->items_size = items;
+	m->strategy_size = strategies;
+}
+
+#endif // MARKET_PROTO_H
