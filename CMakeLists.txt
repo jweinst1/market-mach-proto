@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.3)
 
 project(market_proto VERSION 0.0.1)
 
+include( CheckCSourceCompiles )
+
 # Option to install targets to env location
 if(DEFINED ENV{MARKET_PROTO_HOME})
      message("-- Will install MARKET_PROTO_HOME binaries and libraries to location: " $ENV{MARKET_PROTO_HOME})
@@ -31,4 +33,11 @@ if(WITH_debug MATCHES ON)
    add_definitions(-DWITH_DEBUG_F)
 endif(WITH_debug MATCHES ON)
 
-include_directories($(PROJECT_SOURCE_DIR)/include)
+
+# The header content of the basic market types
+
+file(READ market-types.h MARKET_TYPES_HEADER)
+
+set(TEST_MARKET_TYPES_HEADER "${MARKET_TYPES_HEADER} int main(void) { return 0; }")
+
+check_c_source_compiles("${TEST_MARKET_TYPES_HEADER}" WORKS_MARKET_TYPES)
