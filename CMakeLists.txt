@@ -41,3 +41,19 @@ file(READ market-types.h MARKET_TYPES_HEADER)
 set(TEST_MARKET_TYPES_HEADER "${MARKET_TYPES_HEADER} int main(void) { return 0; }")
 
 check_c_source_compiles("${TEST_MARKET_TYPES_HEADER}" WORKS_MARKET_TYPES)
+
+set(MARKET_PROTO_HEADERS
+    market-types.h
+    market-strategy.h
+)
+
+# Create a single header of all headers
+set(MARKET_PROTO_SINGLE_HEADER "")
+foreach( HFILE ${MARKET_PROTO_HEADERS})
+    file(READ ${HFILE} H_HEADER_CONTENT)
+    set(MARKET_PROTO_SINGLE_HEADER "${MARKET_PROTO_SINGLE_HEADER} \n${H_HEADER_CONTENT}")
+endforeach()
+
+set(MARKET_PROTO_SOURCES
+    market-strategy.c
+)
