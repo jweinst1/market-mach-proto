@@ -44,6 +44,7 @@ check_c_source_compiles("${TEST_MARKET_TYPES_HEADER}" WORKS_MARKET_TYPES)
 
 set(MARKET_PROTO_HEADERS
     market-types.h
+    market-order.h
     market-strategy.h
 )
 
@@ -57,3 +58,21 @@ endforeach()
 set(MARKET_PROTO_SOURCES
     market-strategy.c
 )
+
+# Create a single source file of all .c files
+set(MARKET_PROTO_SINGLE_SOURCE "")
+foreach( CFILE ${MARKET_PROTO_SOURCES})
+    file(READ ${CFILE} C_FILE_CONTENT)
+    set(MARKET_PROTO_SINGLE_SOURCE "${MARKET_PROTO_SINGLE_SOURCE} \n${C_FILE_CONTENT}")
+endforeach()
+
+# Test for __func__
+check_c_source_compiles("int main(void) { const char* foo = __func__; return 0;}" WORKS_FUNC_KEYWORD)
+
+# Build the lib
+
+add_library(market_protos STATIC "${MARKET_PROTO_SOURCES}")
+
+add_executable(test_strategy test_market-strategy.c)
+target_link_libraries(test_strategy PRIVATE market_protos)
+add_test(test_strategy test_strategy)

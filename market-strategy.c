@@ -27,12 +27,5 @@ char Market_strategy_op_tochar(MarketStrategyOp op)
 		case MARKET_STRATEGY_OP_EQ:
 		    return '=';
 	}
-}
-
-void Market_strategy_debug(const MarketStrategy* mst)
-{
-	printf("strategy: ");
-	printf("customer(%ld) ", mst->customer);
-	printf("if(item %lu %c %f) ", mst->item, Market_strategy_op_tochar(mst->op), mst->cprice);
-	printf("then(do %u with limit %f)\n", mst->act, mst->lprice);
+	return '\0';
 }
