@@ -56,6 +56,7 @@ foreach( HFILE ${MARKET_PROTO_HEADERS})
 endforeach()
 
 set(MARKET_PROTO_SOURCES
+    market-order.c
     market-strategy.c
 )
 
@@ -73,6 +74,17 @@ check_c_source_compiles("int main(void) { const char* foo = __func__; return 0;}
 
 add_library(market_protos STATIC "${MARKET_PROTO_SOURCES}")
 
-add_executable(test_strategy test_market-strategy.c)
-target_link_libraries(test_strategy PRIVATE market_protos)
-add_test(test_strategy test_strategy)
+set(MARKET_PROTO_TEST_FILES
+    test_market-order.c
+    test_market-strategy.c
+)
+
+foreach(TFILE ${MARKET_PROTO_TEST_FILES})
+    message("** Adding test for file ${TFILE}")
+    # This is a temporary executable, will be something like 'foo.c.exe' on windows.
+    add_executable(${TFILE} ${TFILE})
+    target_link_libraries(${TFILE} PRIVATE market_protos)
+    add_test("${TFILE}" ${TFILE})
+endforeach()
+
+
