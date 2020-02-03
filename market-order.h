@@ -22,4 +22,7 @@ double MarketOrder_het_demand(const MarketOrder* o, size_t length);
  */
 double MarketOrder_hom_demand(const MarketOrder* o, size_t length);
 
+double MarketOrder_het_supply(const MarketOrder* o, size_t length);
+
+double MarketOrder_hom_supply(const MarketOrder* o, size_t length);
 #endif // MARKET_ORDER_H

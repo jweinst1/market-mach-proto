@@ -64,3 +64,32 @@ double MarketOrder_hom_demand(const MarketOrder* o, size_t length)
 	}
 	return demand;
 }
+
+double MarketOrder_het_supply(const MarketOrder* o, size_t length)
+{
+	double demand = 0.0;
+	const MarketOrder* oend = o + length;
+	while (o != oend) {
+		switch(o->type) {
+			case MARKET_ORDER_TYPE_SELL_L:
+			case MARKET_ORDER_TYPE_SELL_M:
+			    demand += (o->price * o->amount);
+			default:
+			    break;	
+		}
+		++o;
+	}
+
+	return demand;
+}
+
+double MarketOrder_hom_supply(const MarketOrder* o, size_t length)
+{
+	double demand = 0.0;
+	const MarketOrder* oend = o + length;
+	while (o != oend) {
+		demand += (o->price * o->amount);
+		++o;
+	}
+	return demand;
+}
