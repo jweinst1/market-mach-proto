@@ -51,8 +51,10 @@ typedef struct {
 	double price;
 	MarketOrder* buy_orders;
 	size_t buy_size;
+	size_t buy_cap;
 	MarketOrder* sell_orders;
 	size_t sell_size;
+	size_t sell_cap;
 } MarketItem;
 
 typedef struct {

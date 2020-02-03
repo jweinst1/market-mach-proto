@@ -12,4 +12,14 @@ void MarketOrder_init(MarketOrder* o,
 
 double MarketOrder_buy_power(const MarketOrder* o);
 
+double MarketOrder_sell_power(const MarketOrder* o);
+/**
+ * @brief Calculates the demand, assumes orders are heterogenous (both by and sell)
+ */
+double MarketOrder_het_demand(const MarketOrder* o, size_t length);
+/**
+ * @brief Calculates the demand, assumes orders are homogenous (only buy)
+ */
+double MarketOrder_hom_demand(const MarketOrder* o, size_t length);
+
 #endif // MARKET_ORDER_H

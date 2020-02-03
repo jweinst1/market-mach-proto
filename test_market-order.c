@@ -11,6 +11,8 @@ static void test_MarketOrder_buy_power(void)
 	foo.type = MARKET_ORDER_TYPE_BUY_M;
 	result = MarketOrder_buy_power(&foo);
 	UNIT_CHECK(result == 500.0);
+	foo.type = MARKET_ORDER_TYPE_SELL_M;
+	UNIT_CHECK(MarketOrder_buy_power(&foo) == 0.0);
 }
 
 int main(int argc, char const *argv[])
